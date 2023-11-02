@@ -165,22 +165,21 @@
 <script src="{{ asset('adminlte/dist/js/adminlte.js')}}"></script>
 
 <script>
-  //Datemask dd/mm/yyyy
-
-  
       //Date picker
       $('#reservationdate').datetimepicker({
           autoclose: true,
           format: 'YYYY-MM-DD',
       });
+
+      $('#reservationdate2').datetimepicker({
+          autoclose: true,
+          format: 'YYYY-MM-DD',
+      });
+
+      //Date range picker
+      $('#reservation').daterangepicker()
   
-      // //Date and time picker
-      // $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
-      // $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-      // //Datemask2 mm/dd/yyyy
-      // $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-      // //Money Euro
-      // $('[data-mask]').inputmask()
+
   </script>
 </body>
 </html>

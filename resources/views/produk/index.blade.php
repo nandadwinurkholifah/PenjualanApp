@@ -78,7 +78,7 @@
                   <h6 class="mb-0 text-md">{{ $data->kategori->kategori}} </h6>
                 </td>
                 <td class="align-middle text-center text-md">
-                  <h6 class="mb-0 text-md">{{ $data->harga}} </h6>
+                  <h6 class="mb-0 text-md">@rupiah ($data->harga)</h6>
                 </td>
                 <td class="align-middle text-center text-md">
                   <img class="img-thumbnail" width="100px" src="{{ asset('upload/'.$data->gambar_produk)}}">

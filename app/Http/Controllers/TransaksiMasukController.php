@@ -7,17 +7,34 @@ use App\Models\TransaksiMasuk;
 use App\Models\Produk;
 use App\Models\Supplier;
 use Validator;
+use Carbon\Carbon;
 
 class TransaksiMasukController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $transaksi_masuks = TransaksiMasuk::orderBy('tgl_transaksi','DESC')->paginate(5);
-        return view('transaksi_masuk.index',compact('transaksi_masuks'));
+    public function index(Request $request)
+{
+    $start_date = $request->get('start_date');
+    $end_date = $request->get('end_date');
+    
+    // Tambahkan ini untuk mengecek nilai $start_date dan $end_date
+    // dd($start_date, $end_date);
+
+    $transaksi_masuks = TransaksiMasuk::orderBy('tgl_transaksi', 'DESC')->paginate(5);
+
+    if ($start_date != "" && $end_date != "") {
+        $transaksi_masuks = TransaksiMasuk::whereBetween('tgl_transaksi', [$start_date, $end_date])->orderBy('tgl_transaksi', 'DESC')->paginate(3);
+    
+        $start_date = Carbon::parse($start_date)->format('Y-m-d');
+        $end_date = Carbon::parse($end_date)->format('Y-m-d');
     }
+    
+
+    return view('transaksi_masuk.index', compact('transaksi_masuks', 'start_date', 'end_date'));
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -83,6 +100,14 @@ class TransaksiMasukController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $transaksi_masuk = TransaksiMasuk::findOrFail($id);
+        $jumlah = $transaksi_masuk->jumlah;
+
+        $produk = Produk::find($transaksi_masuk->kd_produk);
+        $data['stok'] = $produk->stok - $jumlah;
+        $produk->update($data);
+
+        $transaksi_masuk->delete();
+        return redirect()->route('transaksi_masuk.index')->with('status','Transaksi Masuk Berhasil dihapus');
     }
 }
