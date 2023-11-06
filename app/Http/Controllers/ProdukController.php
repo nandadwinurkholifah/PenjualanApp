@@ -71,6 +71,7 @@ class ProdukController extends Controller
             $request->file('gambar_produk')->move($upload_path,$namaFoto);
             $input['gambar_produk'] = $namaFoto;
         }
+        
         $input['stok'] = 0;
         Produk::create($input);
         return redirect()->route('produk.index')->with('status','Produk Berhasil Disimpan');

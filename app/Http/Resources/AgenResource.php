@@ -21,7 +21,7 @@ class AgenResource extends JsonResource
             'alamat' => $this->alamat,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
-            'gambar_toko' => env('ASSET_URL'). "upload/". $this->gambar_toko
+            'gambar_toko' => env('ASSET_URL')."/upload/". $this->gambar_toko
         ];
     }
 }
