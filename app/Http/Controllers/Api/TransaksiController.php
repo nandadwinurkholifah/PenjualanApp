@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Resources\KeranjangResource;
 use Illuminate\Support\Facades\DB;
+use App\Http\Resources\KeranjangResource;
+use App\Http\Resources\TransaksiResource;
+use App\Http\Resources\TransaksiDetailResource;
 use Validator;
 use App\Models\Keranjang;
 use App\Models\Produk;
+use App\Models\Transaksi;
+use App\Models\TransaksiDetail;
 
 class TransaksiController extends Controller
 {
@@ -149,6 +153,42 @@ class TransaksiController extends Controller
         }
         $hasil = date('dmy').$kd;
             return $hasil;
+    }
+
+    private function get_total_cart($username)
+    {
+        $data_keranjang = Keranjang::where('username',$username)->get();
+        $total = 0;
+        foreach ($data_keranjang as $datker) {
+            $total = $total + ($datker->jumlah * $datker->harga);
+        }
+        return $total;
+    }
+
+    function get_transaksi(Request $request)
+    {
+        $username = $request->input('username');
+        $data_transaksi = Transaksi::where('username',$username)->get();
+        if ($data_transaksi->isEmpty()) {
+            return response()->json([
+                'status' => FALSE,
+                'msg' => 'Record Tidak Ditemukan',
+            ],200);
+        }
+        return TransaksiResource::collection($data_transaksi);
+    }
+
+    function get_detail_transaksi(Request $request)
+    {
+        $no_faktur = $request->input('no_faktur');
+        $data_detail_transaksi = TransaksiDetail::where('no_faktur',$no_faktur)->get();
+        if ($data_detail_transaksi->isEmpty()) {
+            return response()->json([
+                'status' => FALSE,
+                'msg' => 'Record Tidak Ditemukan',
+            ],200);
+        }
+        return TransaksiDetailResource::collection($data_detail_transaksi);
     }
    
 }

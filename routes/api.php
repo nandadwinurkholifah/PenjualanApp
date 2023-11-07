@@ -28,3 +28,6 @@ Route::post('add_cart', 'App\Http\Controllers\Api\TransaksiController@add_cart')
 Route::post('get_cart', 'App\Http\Controllers\Api\TransaksiController@get_cart');
 Route::post('delete_item_cart', 'App\Http\Controllers\Api\TransaksiController@delete_item_cart');
 Route::post('delete_cart', 'App\Http\Controllers\Api\TransaksiController@delete_cart');
+Route::post('checkout', 'App\Http\Controllers\Api\TransaksiController@checkout');
+Route::post('get_transaksi', 'App\Http\Controllers\Api\TransaksiController@get_transaksi');
+Route::post('get_detail_transaksi', 'App\Http\Controllers\Api\TransaksiController@get_detail_transaksi');

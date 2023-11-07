@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('transaksi_detail', function (Blueprint $table) {
-            $table->increments('kd_transaksi_detail');
+            $table->increments('kd_detail_transaksi');
             $table->string('no_faktur',100);
             $table->foreign('no_faktur')->references('no_faktur')->on('transaksi');
             $table->unsignedInteger('kd_produk');

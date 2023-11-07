@@ -25,16 +25,22 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-
 Route::match(["get","post"],"/register",function(){
     return redirect('login');
 })->name("register");
 
+Route::group(['middleware' => ['auth']],function(){ 
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::resource('user', UserController::class);
 Route::resource('supplier', SupplierController::class);
 Route::resource('pegawai', PegawaiController::class);
 Route::resource('kategori', KategoriController::class);
 Route::resource('produk', ProdukController::class);
 Route::resource('transaksi_masuk', TransaksiMasukController::class);
+Route::get('agen', 'App\Http\Controllers\AgenController@index')->name('agen');
+Route::get('report', 'App\Http\Controllers\ReportPenjualanController@index')->name('report');
+Route::get('cetak_pdf', 'App\Http\Controllers\ReportPenjualanController@cetak_pdf')->name('cetak_pdf');
+Route::get('cetak_excel', 'App\Http\Controllers\ReportPenjualanController@cetak_excel')->name('cetak_excel');
+
+});
