@@ -81,6 +81,7 @@ class AgenController extends Controller
                 'msg' => 'Record Not Found',
             ],404);
         }
+        return new AgenResource($agen);
     }
 
     /**
