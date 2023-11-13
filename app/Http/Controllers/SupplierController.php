@@ -95,6 +95,6 @@ class SupplierController extends Controller
         $suppliers = Supplier::findorfail($id);
         $suppliers->delete();
         
-        return redirect()->route('supplier.index',compact('supplier'))->with('status','Supplier berhasil didelete');
+        return redirect()->route('supplier.index',compact('suppliers'))->with('status','Supplier berhasil didelete');
     }
 }
