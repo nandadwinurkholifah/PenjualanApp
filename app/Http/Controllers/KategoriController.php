@@ -48,10 +48,11 @@ class KategoriController extends Controller
             return redirect()->route('kategori.create')->withErrors($validasi)->withInput();
         }
 
-        $gambar_kategori = $request->file('gambar_kategori');
-        $extention = $gambar_kategori->getClientOriginalExtension();
+        
 
         if ($request->file('gambar_kategori')->isValid()) {
+            $gambar_kategori = $request->file('gambar_kategori');
+            $extention = $gambar_kategori->getClientOriginalExtension();
             $namaFoto = "kategori/".date('YmdHis').".".$extention;
             $upload_path = 'public/upload/kategori';
             $request->file('gambar_kategori')->move($upload_path,$namaFoto);

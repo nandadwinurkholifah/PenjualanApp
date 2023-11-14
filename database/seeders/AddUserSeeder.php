@@ -29,14 +29,6 @@ class AddUserSeeder extends Seeder
             'password' => Hash::make('budi123'),
             'level' => 'staff',
         ]);
-
-        $user3 = User::create([
-            'username' => 'Anggun',
-            'name' => 'Anggun Sulistya',
-            'email' => 'Anggun@gmail.com',
-            'password' => Hash::make('aggun123'),
-            'level' => 'staff',
-        ]);
         $this->command->info("User berhasil dibuat");
     }
 }
