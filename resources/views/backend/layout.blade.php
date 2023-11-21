@@ -128,10 +128,11 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
-
+@stack('js_image')
 
 <!-- jQuery -->
 <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js')}}"></script>
+
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('adminlte/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 
@@ -139,7 +140,7 @@
  <script>
  $.widget.bridge('uibutton', $.ui.button)
 </script> 
-@stack('js')
+
 <!-- Bootstrap 4 -->
 <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- ChartJS -->
