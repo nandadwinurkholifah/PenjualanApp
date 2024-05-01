@@ -84,7 +84,7 @@
 <script>
   var ctx = document.getElementById("myChart").getContext('2d');
   var myChart = new Chart(ctx, {
-    type: 'line',
+    type: 'bar',
     data: {
       labels: @php echo json_encode($nama_produk); @endphp,
       datasets: [{

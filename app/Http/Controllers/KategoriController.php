@@ -84,7 +84,7 @@ class KategoriController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $kategoris = Kategori::findorfail($id);
+        $kategoris = Kategori::findOrfail($id);
 
         $input = $request->all();
 
